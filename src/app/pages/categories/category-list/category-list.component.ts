@@ -1,4 +1,7 @@
+import { Category } from './../shared/category.model';
+import { CategoryService } from './../shared/category.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-category-list',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryListComponent implements OnInit {
 
-  constructor() { }
+  category: any =  [
+    {id: '1', nome: 'Moradia', description: 'Pagamento sera que muda'},
+    {id: '2', nome: 'Lazer', description: 'Pagamento aluguel'},
+    {id: '3', nome: 'Carro', description: 'Pagamento aluguel'},
+    {id: '4', nome: 'Viagem', description: 'Pagamento aluguel'}
+];
+
+  constructor(private categoryService: CategoryService ) { }
 
   ngOnInit() {
+    this.categoryService.addCategory(this.category);
   }
 
 }
