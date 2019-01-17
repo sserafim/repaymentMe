@@ -7,6 +7,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { RouterModule } from '@angular/router';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
+
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 
@@ -23,7 +27,10 @@ import { environment } from 'src/environments/environment';
     AngularFirestoreModule,
     RouterModule.forRoot([
       { path: 'categories', loadChildren: './pages/categories/categories.module#CategoriesModule' }
-    ])
+    ]),
+    FormsModule,
+    NgbModule,
+    CustomFormsModule
   ],
   providers: [
   ],

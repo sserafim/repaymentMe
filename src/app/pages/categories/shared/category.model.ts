@@ -1,8 +1,10 @@
 export class Category {
 
-        id: string;
+        $key: string;
         nome: string;
         description: string;
 
-        constructor() {}
+        constructor() {
+
+        }
 }

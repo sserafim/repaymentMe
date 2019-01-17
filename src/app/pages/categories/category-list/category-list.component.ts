@@ -1,6 +1,6 @@
-import { Category } from './../shared/category.model';
 import { CategoryService } from './../shared/category.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,17 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryListComponent implements OnInit {
 
-  category: any =  [
-    {id: '1', nome: 'Moradia', description: 'Pagamento sera que muda'},
-    {id: '2', nome: 'Lazer', description: 'Pagamento aluguel'},
-    {id: '3', nome: 'Carro', description: 'Pagamento aluguel'},
-    {id: '4', nome: 'Viagem', description: 'Pagamento aluguel'}
-];
+ categories: Observable<any>;
 
-  constructor(private categoryService: CategoryService ) { }
+  constructor(private categoryService: CategoryService ) {
+  }
 
   ngOnInit() {
-    this.categoryService.addCategory(this.category);
+      this.categories = this.categoryService.getAll();
+  }
+
+  excluir(categoryId) {
+        // tslint:disable-next-line:curly
+        if (!confirm('Confirma a exclusão dessa Categoria')) return;
+
+        this.categoryService.delete(categoryId);
   }
 
 }

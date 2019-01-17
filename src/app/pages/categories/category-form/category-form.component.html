@@ -1,3 +1,43 @@
-<p>
-  category-form works!
-</p>
+<nav class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item"><a routerLink="/categories">Categorias</a></li>
+    <li class="breadcrumb-item active">Categoria</li>      
+  </ol>
+</nav>
+
+<div class="row mb-3">
+<div class="col-md">
+  <div class="h2 border-left pl-2">
+    Categoria
+  </div>
+</div>
+<div class="col-md">
+    <a routerLink="/categories" class="btn btn-success float-right">
+      < voltar 
+    </a>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm" (ngSubmit)="save(f.value)">
+      
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input #nome="ngModel" [(ngModel)]="category.nome" name="nome" id="nome" type="text" class="form-control" required>
+      </div>   
+
+      <div class="form-group">
+        <label for="description">Descrição</label>
+        <input #description="ngModel" [(ngModel)]="category.description" name="description" id="description" type="text" class="form-control" required>
+      </div>   
+        
+        
+        <button class="btn btn-primary mr-1">Save</button>
+        <button *ngIf="id" type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+
+    </form>
+  </div>
+</div>

@@ -1,7 +1,9 @@
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { AngularFirestoreModule, AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable, OnInit } from '@angular/core';
 import { Category } from './category.model';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -9,13 +11,8 @@ import { Category } from './category.model';
 })
 export class CategoryService implements OnInit {
 
-  categoryCol: AngularFirestoreCollection<Category[]>;
-  public category: AngularFireList<Category>;
-
-
   constructor(private afs: AngularFirestore, private db: AngularFireDatabase) {
-    // this.categoryCol = afs.collection<Category>('categories');
-    this.category = db.list('/categories');
+
    }
 
 
@@ -23,24 +20,29 @@ export class CategoryService implements OnInit {
   ngOnInit() {
   }
 
-  addCategory(category: Category): void {
-      this.category.push(category);
+  create(category) {
+    return this.db.list('/categories').push(category);
   }
 
-/*
-  save(category: Category): Promise<void> {
-    return this.categoryCol.add(Object.assign({}, category)).then(objeto => {
-
-        category.id = objeto.id;
-        this.update(category);
-    });
-  }*/
-
-  update(category: Category): Promise<void> {
-    return this.categoryCol.doc(category.id)
-      .update(Object.assign({}, category));
+  getAll() {
+    return this.db.list('/categories').snapshotChanges()
+            .pipe(
+              map(changes => {
+                   return changes.map(cat => ({key: cat.payload.key, ...cat.payload.val() }));
+              }));
   }
 
+  get(categoryId) {
+    return this.db.object('/categories/' + categoryId);
+  }
+
+  update(categoryId, category) {
+    return this.db.object('/categories/' + categoryId).update(category);
+  }
+
+  delete(categoryId) {
+    return this.db.object('/categories/' + categoryId).remove();
+  }
 
 
 }
