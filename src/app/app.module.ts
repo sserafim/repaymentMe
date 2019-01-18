@@ -14,6 +14,10 @@ import { CustomFormsModule } from 'ng2-validation';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
 
 @NgModule({
   declarations: [
@@ -26,11 +30,14 @@ import { environment } from 'src/environments/environment';
     AngularFireAuthModule,
     AngularFirestoreModule,
     RouterModule.forRoot([
-      { path: 'categories', loadChildren: './pages/categories/categories.module#CategoriesModule' }
+      { path: 'categories', loadChildren: './pages/categories/categories.module#CategoriesModule' },
+      { path: 'entries', loadChildren: './pages/entries/entries.module#EntriesModule' }
     ]),
     FormsModule,
     NgbModule,
-    CustomFormsModule
+    CustomFormsModule,
+    BrowserAnimationsModule
+
   ],
   providers: [
   ],
