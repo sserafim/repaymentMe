@@ -29,10 +29,10 @@
     
     <!--Tipo Despesa Lançamento-->
     <div class="form-group col-md-2">
-          <label for="tipoDespesa">Categoria</label>
+          <label for="tipoDespesa">Tipo</label>
           <select #tipoDespesa="ngModel" [(ngModel)]="entries.tipoDespesa" name="tipoDespesa" id="tipoDespesa"  class="form-control" required>     
-              <option value="despesa">Despesa</option>
-              <option value="receita">Receita</option>        
+            
+            <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.text }}</option>        
           </select>
       </div>
      
@@ -97,17 +97,28 @@
         </div> 
         
 
+        <!--Lista Categoria Lançamento-->
+        <div class="form-group col-md-3">
+            <label for="category">Categoria</label>
+            <select #category="ngModel" [(ngModel)]="entries.category" name="category" id="category"  class="form-control" required>     
+                <option *ngFor="let c of categories$ | async" [value]="c.key">
+                    {{ c.nome }}                                    
+            </select>
+        </div>
+
         <!--Descrição Lançamento-->
-        <div class="form-group col-md-10">
+        <div class="form-group col-md-7">
           <label for="descricao">Descrição</label>
           <input #descricao="ngModel" [(ngModel)]="entries.descricao" name="descricao" id="descricao" type="text" class="form-control" required>
         </div>  
 
   </div>  
         
-        <button class="btn btn-primary mr-1">Save</button>
-        <button *ngIf="id" type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+        <button type="button" (click)="delete()" class="btn btn-danger float-right btn-sm">Delete</button>
+        <button class="btn btn-primary mr-1 float-right">Save</button>
+
 
     </form>
+     <!-- <pre>{{ entries | json }}</pre>  -->
   </div>
 </div>

@@ -34,9 +34,9 @@
         <input #description="ngModel" [(ngModel)]="category.description" name="description" id="description" type="text" class="form-control" required>
       </div>   
         
-        
-        <button class="btn btn-primary mr-1">Save</button>
-        <button *ngIf="id" type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+                
+        <button *ngIf="id" type="button" (click)="delete()" class="btn btn-danger float-right btn-sm">Delete</button>
+        <button class="btn btn-primary mr-1 float-right">Save</button>
 
     </form>
   </div>

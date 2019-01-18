@@ -1,5 +1,7 @@
+import { CategoryService } from './../../categories/shared/category.service';
 import { Entrie } from './../shared/entries.model';
 import { Component, OnInit } from '@angular/core';
+
 
 
 @Component({
@@ -9,7 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntriesFormComponent implements OnInit {
 
-  entries: {} = new Entrie;
+
+
+  entries: {} = new Entrie();
+  categories$;
+
+
 
    ptBR = {
     firstDayOfWeek: 0,
@@ -23,9 +30,25 @@ export class EntriesFormComponent implements OnInit {
     clear: 'Limpar'
   };
 
-  constructor() { }
+  constructor(private categoriesService: CategoryService) {
+
+  }
 
   ngOnInit() {
+    this.categories$ = this.categoriesService.getAll();
   }
+
+  get typeOptions(): Array<any> {
+    return Object.entries(Entrie.types).map(
+      ([value, text]) => {
+          return {
+            value: value,
+            text: text
+          };
+       }
+    );
+  }
+
+
 
 }

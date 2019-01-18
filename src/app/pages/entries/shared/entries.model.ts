@@ -8,4 +8,13 @@ export class Entrie {
     pago: boolean;
     category: string;
 
+    constructor() {}
+
+    // tslint:disable-next-line:member-ordering
+    static types = {
+        despesa: 'Despesa',
+        receita: 'Receita'
+    };
+
+
 }
