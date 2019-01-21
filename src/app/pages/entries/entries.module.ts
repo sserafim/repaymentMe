@@ -1,4 +1,4 @@
-import { EntriesService } from './shared/entries.service';
+import { EntrieService } from './shared/entrie.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -30,7 +30,7 @@ import { CalendarModule } from 'primeng/calendar';
     CalendarModule
   ],
   providers: [
-    EntriesService
+    EntrieService
   ],
 })
 export class EntriesModule { }
