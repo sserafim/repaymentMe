@@ -3,10 +3,7 @@ import { CategoryService } from './../shared/category.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { Validators } from '@angular/forms';
-import { AfterContentChecked } from '@angular/core';
 
-import toastr from 'toastr';
 
 @Component({
   selector: 'app-category-form',
@@ -15,7 +12,7 @@ import toastr from 'toastr';
 })
 export class CategoryFormComponent implements OnInit {
 
-  category: {} = new Category;
+  category: any = new Category;
   id;
 
   constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute) {

@@ -1,33 +1,17 @@
-import { EntrieService } from './shared/entrie.service';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { EntriesRoutingModule } from './entries-routing.module';
 import { EntriesListComponent } from './entries-list/entries-list.component';
 import { EntriesFormComponent } from './entries-form/entries-form.component';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { CustomFormsModule } from 'ng2-validation';
-
-import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { CalendarModule } from 'primeng/calendar';
-
-
-
-
+import { EntrieService } from './shared/entrie.service';
 
 
 @NgModule({
   declarations: [EntriesListComponent, EntriesFormComponent],
   imports: [
-    CommonModule,
-    EntriesRoutingModule,
-    NgbModule,
-    FormsModule,
-    CustomFormsModule,
-    CurrencyMaskModule,
-    CalendarModule
+    SharedModule,
+    EntriesRoutingModule
   ],
   providers: [
     EntrieService

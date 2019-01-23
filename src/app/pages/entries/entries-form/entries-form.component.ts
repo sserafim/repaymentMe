@@ -17,7 +17,7 @@ export class EntriesFormComponent implements OnInit {
 
   entrie: {} = new Entrie();
   categories$;
-  id;
+  ide;
 
    ptBR = {
     firstDayOfWeek: 0,
@@ -34,9 +34,9 @@ export class EntriesFormComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   constructor(private categoriesService: CategoryService, private router: Router, private route: ActivatedRoute, private entrieService: EntrieService) {
 
-        this.id = this.route.snapshot.paramMap.get('id');
-        if (this.id) {
-            this.entrieService.get(this.id).valueChanges().pipe(take(1)).subscribe(e => {
+        this.ide = this.route.snapshot.paramMap.get('id');
+        if (this.ide) {
+            this.entrieService.get(this.ide).valueChanges().pipe(take(1)).subscribe(e => {
                   this.entrie = e;
             });
         } else {
@@ -64,8 +64,8 @@ export class EntriesFormComponent implements OnInit {
   }
 
   save(entrie) {
-    if (this.id) {
-      this.entrieService.update(this.id, entrie);
+    if (this.ide) {
+      this.entrieService.update(this.ide, entrie);
     } else {
     this.entrieService.create(entrie);
     }
@@ -76,7 +76,7 @@ export class EntriesFormComponent implements OnInit {
     // tslint:disable-next-line:curly
     if (!confirm('Confirma a exclusão dessa Categoria')) return;
 
-        this.entrieService.delete(this.id);
+        this.entrieService.delete(this.ide);
         this.router.navigate(['/entries']);
   }
 

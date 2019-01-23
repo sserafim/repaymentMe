@@ -1,15 +1,15 @@
 export class Entrie {
 
-     $key: string;
-     nomeDespesa: string;
-     descricao: string;
-     tipoDespesa: string;
-     valor: number;
-     data: string;
-     pago: boolean;
-     category: string;
-
-    constructor() {}
+    constructor(
+      public id?: string,
+      public nomeDespesa?: string,
+      public descricao?: string,
+      public tipoDespesa?: string,
+      public valor?: number,
+      public data?: string,
+      public pago?: boolean,
+      public category?: string
+    ) {}
 
     // tslint:disable-next-line:member-ordering
     static types = {
@@ -17,8 +17,8 @@ export class Entrie {
         receita: 'Receita'
     };
 
-    get pagoPendente(): string {
-        return this.pago ? 'Pago' : 'Pendente';
+    get pagoPendente() {
+        return this.pago;
     }
 
 }

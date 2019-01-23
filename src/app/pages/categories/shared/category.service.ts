@@ -1,48 +1,15 @@
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { AngularFirestoreModule, AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable, OnInit } from '@angular/core';
-import { Category } from './category.model';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService implements OnInit {
+export class CategoryService extends BaseResourceService {
 
-  constructor(private afs: AngularFirestore, private db: AngularFireDatabase) {
-
+  constructor(protected db: AngularFireDatabase) {
+     super('categories', db);
    }
-
-
-
-  ngOnInit() {
-  }
-
-  create(category) {
-    return this.db.list('/categories').push(category);
-  }
-
-  getAll() {
-    return this.db.list('/categories').snapshotChanges()
-            .pipe(
-              map(changes => {
-                   return changes.map(cat => ({key: cat.payload.key, ...cat.payload.val() }));
-              }));
-  }
-
-  get(categoryId) {
-    return this.db.object('/categories/' + categoryId);
-  }
-
-  update(categoryId, category) {
-    return this.db.object('/categories/' + categoryId).update(category);
-  }
-
-  delete(categoryId) {
-    return this.db.object('/categories/' + categoryId).remove();
-  }
-
 
 }
