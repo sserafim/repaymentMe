@@ -16,9 +16,9 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot([
       { path: 'categories', loadChildren: './pages/categories/categories.module#CategoriesModule' },
-      { path: 'entries', loadChildren: './pages/entries/entries.module#EntriesModule' }
+      { path: 'entries', loadChildren: './pages/entries/entries.module#EntriesModule' },
+      { path: 'reports', loadChildren: './pages/reports/reports.module#ReportsModule' }
     ])
-
   ],
   providers: [
   ],

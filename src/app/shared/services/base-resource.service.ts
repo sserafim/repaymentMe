@@ -20,6 +20,19 @@ export abstract class BaseResourceService {
                   }));
       }
 
+      getAllX() {
+        return this.db.list(`/${this.uriFirebase}`).snapshotChanges()
+                .pipe(
+                  map(change => {
+                       change.map(action => {
+                            // const $key = action.payload.key;
+                            const data = {...action.payload.val() };
+                            return data;
+                       });
+
+                  }));
+      }
+
       get(id) {
         return this.db.object(`/${this.uriFirebase}/${id}`);
       }

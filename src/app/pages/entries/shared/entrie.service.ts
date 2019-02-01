@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { map } from 'rxjs/operators';
-import { Entrie } from './entrie.model';
 import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
 
 
@@ -11,7 +9,7 @@ import { BaseResourceService } from 'src/app/shared/services/base-resource.servi
 export class EntrieService extends BaseResourceService {
 
   constructor(protected db: AngularFireDatabase) {
-    super('entries' , db);
+      super('entries' , db);
   }
 
 }

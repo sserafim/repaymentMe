@@ -1,5 +1,5 @@
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Injectable, OnInit } from '@angular/core';
 import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
 
 
