@@ -1,7 +1,7 @@
 import { Entrie } from './../shared/entrie.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EntrieService } from '../shared/entrie.service';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-entries-list',

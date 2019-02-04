@@ -20,17 +20,19 @@ export abstract class BaseResourceService {
                   }));
       }
 
-      getAllX() {
+      getAllX(resource): any {
+        const fetchRecord: any[] = [];
         return this.db.list(`/${this.uriFirebase}`).snapshotChanges()
                 .pipe(
-                  map(change => {
-                       change.map(action => {
-                            // const $key = action.payload.key;
-                            const data = {...action.payload.val() };
-                            return data;
-                       });
-
-                  }));
+                  map(changes => {
+                       return changes.map(cat => ({key: cat.payload.key, ...cat.payload.val() }));
+                  })).subscribe(x => {
+                    x.forEach(element => {
+                         const y = Object.assign(new resource(), element);
+                         fetchRecord.push(y);
+                    });
+                    return fetchRecord;
+                  });
       }
 
       get(id) {
