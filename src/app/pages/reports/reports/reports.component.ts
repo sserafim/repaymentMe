@@ -46,7 +46,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.categories = this.fetchCategories();
     this.entries = this.fetchEntries();
-    console.log('passou aqui >> ', this.entries );
   }
 
   fetchCategories(): Category[] {
@@ -79,9 +78,40 @@ export class ReportsComponent implements OnInit, OnDestroy {
     if (!month || !year) {
       alert('Você precisa selecionar o Mês e o Ano');
      } else {
-        this.entrieService.getByMonthAndYear(month, year);
+        this.entrieService.getByMonthAndYear(month, year).subscribe(this.setValues.bind(this));
       }
     }
+
+  setValues(entr: Entrie[]) {
+    this.entries = entr;
+    this.calculateBalance();
+    this.setChartData();
+  }
+
+  calculateBalance() {
+    let despesaTotal = 0;
+    let receitaTotal = 0;
+    this.entries.forEach(entrie => {
+      if (entrie.tipoDespesa = 'despesa') {
+           despesaTotal += entrie.valor;
+      } else {
+        receitaTotal += entrie.valor;
+      }
+    });
+
+    console.log('despesaTotal ' , despesaTotal);
+    console.log('receitaTotal ' , receitaTotal);
+
+  this.receitaTotal = despesaTotal;
+  this.despesatotal = despesaTotal;
+  this.saldoTotal = despesaTotal - receitaTotal;
+
+  }
+
+  setChartData() {
+
+  }
+
 
 
   ngOnDestroy() {

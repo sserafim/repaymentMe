@@ -20,19 +20,8 @@ export abstract class BaseResourceService {
                   }));
       }
 
-      getAllX(resource): any {
-        const fetchRecord: any[] = [];
-        return this.db.list(`/${this.uriFirebase}`).snapshotChanges()
-                .pipe(
-                  map(changes => {
-                       return changes.map(cat => ({key: cat.payload.key, ...cat.payload.val() }));
-                  })).subscribe(x => {
-                    x.forEach(element => {
-                         const y = Object.assign(new resource(), element);
-                         fetchRecord.push(y);
-                    });
-                    return fetchRecord;
-                  });
+      getAllX() {
+        return this.db.list(`/${this.uriFirebase}`).valueChanges();
       }
 
       get(id) {

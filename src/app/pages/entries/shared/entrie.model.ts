@@ -1,7 +1,7 @@
 export class Entrie {
 
     constructor(
-      public id?: string,
+      public key?: string,
       public nomeDespesa?: string,
       public descricao?: string,
       public tipoDespesa?: string,
@@ -17,8 +17,8 @@ export class Entrie {
         receita: 'Receita'
     };
 
-    get pagoPendente() {
+/*     get pagoPendente() {
         return this.pago;
     }
-
+ */
 }
