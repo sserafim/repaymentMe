@@ -45,7 +45,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.categories = this.fetchCategories();
-    this.entries = this.fetchEntries();
   }
 
   fetchCategories(): Category[] {
@@ -92,24 +91,24 @@ export class ReportsComponent implements OnInit, OnDestroy {
     let despesaTotal = 0;
     let receitaTotal = 0;
     this.entries.forEach(entrie => {
-      if (entrie.tipoDespesa = 'despesa') {
+      console.log('passou aqui tipoDespesa >>> ', entrie.tipoDespesa);
+      if (entrie.tipoDespesa === 'despesa') {
            despesaTotal += entrie.valor;
       } else {
-        receitaTotal += entrie.valor;
+          receitaTotal +=  entrie.valor;
       }
     });
 
-    console.log('despesaTotal ' , despesaTotal);
-    console.log('receitaTotal ' , receitaTotal);
-
-  this.receitaTotal = despesaTotal;
+  this.receitaTotal = receitaTotal;
   this.despesatotal = despesaTotal;
-  this.saldoTotal = despesaTotal - receitaTotal;
+  this.saldoTotal =  receitaTotal - despesaTotal;
 
   }
 
   setChartData() {
-
+      this.categories.forEach(category => {
+      const filteredEntries = this.entries.filter(entry => (entry.category === category.nome) && (entry.tipoDespesa === 'receita'));
+      });
   }
 
 
