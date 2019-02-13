@@ -7,6 +7,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 
 
 
+
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
@@ -36,7 +37,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
   entries: Entrie[] = [];
 
   catSubscription: Subscription;
-  entSubscription: Subscription;
 
   @ViewChild('month') month: ElementRef = null;
   @ViewChild('year') year: ElementRef = null;
@@ -59,7 +59,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
 
-  fetchEntries(): Entrie[] {
+/*   fetchEntries(): Entrie[] {
     const entrieLanc: Entrie[] = [];
     this.entSubscription = this.entrieService.getAll().subscribe(ent => {
       ent.forEach(element => {
@@ -68,7 +68,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
       });
     });
       return entrieLanc;
-  }
+  } */
 
   generateReport() {
     const month = this.month.nativeElement.value;
@@ -106,16 +106,39 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   setChartData() {
+
+     const chartData = [];
+
       this.categories.forEach(category => {
       const filteredEntries = this.entries.filter(entry => (entry.category === category.nome) && (entry.tipoDespesa === 'receita'));
-      });
+
+      if (filteredEntries.length > 0) {
+        const totalAmount =  filteredEntries.reduce(
+          (total, entrie) => total + entrie.valor, 0
+        );
+
+                chartData.push({
+                  categoryName: category.nome,
+                  totalAmount: totalAmount
+              });
+      }
+    });
+
+    this.receitaChartTotal = {
+      labels: chartData.map(item => item.categoryName),
+      dataSets: [{
+        label: 'Grafico de Receitas',
+        backgroundColor: '#9CCC65',
+        data: chartData.map(item => item.totalAmount)
+      }]
+    };
+
   }
 
 
 
   ngOnDestroy() {
     this.catSubscription.unsubscribe();
-    this.entSubscription.unsubscribe();
   }
 
 }
